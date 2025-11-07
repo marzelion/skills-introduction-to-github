@@ -33,6 +33,15 @@
 # define KEY_UP 65362
 # define KEY_DOWN 65364
 
+/* Mouse buttons */
+# define MOUSE_SCROLL_UP 4
+# define MOUSE_SCROLL_DOWN 5
+
+/* Movement and zoom constants */
+# define MOVE_STEP 20
+# define ZOOM_IN_FACTOR 1.1
+# define ZOOM_OUT_FACTOR 0.9
+
 /* Model - Fractal data structure */
 typedef struct s_complex
 {

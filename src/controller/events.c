@@ -9,32 +9,32 @@ int	key_press(int keycode, t_fractol *fractol)
 		close_window(fractol);
 	else if (keycode == KEY_PLUS)
 	{
-		fractol->params.zoom *= 1.1;
+		fractol->params.zoom *= ZOOM_IN_FACTOR;
 		render_fractal(fractol);
 	}
 	else if (keycode == KEY_MINUS)
 	{
-		fractol->params.zoom /= 1.1;
+		fractol->params.zoom /= ZOOM_IN_FACTOR;
 		render_fractal(fractol);
 	}
 	else if (keycode == KEY_LEFT)
 	{
-		fractol->params.move_x -= 20;
+		fractol->params.move_x -= MOVE_STEP;
 		render_fractal(fractol);
 	}
 	else if (keycode == KEY_RIGHT)
 	{
-		fractol->params.move_x += 20;
+		fractol->params.move_x += MOVE_STEP;
 		render_fractal(fractol);
 	}
 	else if (keycode == KEY_UP)
 	{
-		fractol->params.move_y -= 20;
+		fractol->params.move_y -= MOVE_STEP;
 		render_fractal(fractol);
 	}
 	else if (keycode == KEY_DOWN)
 	{
-		fractol->params.move_y += 20;
+		fractol->params.move_y += MOVE_STEP;
 		render_fractal(fractol);
 	}
 	return (0);
@@ -49,10 +49,10 @@ int	mouse_hook(int button, int x, int y, t_fractol *fractol)
 
 	(void)x;
 	(void)y;
-	if (button == 4)  /* Scroll up - zoom in */
-		zoom_factor = 1.1;
-	else if (button == 5)  /* Scroll down - zoom out */
-		zoom_factor = 0.9;
+	if (button == MOUSE_SCROLL_UP)
+		zoom_factor = ZOOM_IN_FACTOR;
+	else if (button == MOUSE_SCROLL_DOWN)
+		zoom_factor = ZOOM_OUT_FACTOR;
 	else
 		return (0);
 	fractol->params.zoom *= zoom_factor;

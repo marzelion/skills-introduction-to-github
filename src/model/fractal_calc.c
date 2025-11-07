@@ -55,15 +55,18 @@ int	calculate_julia(t_complex z, t_complex c)
 
 /*
  * Convert screen coordinates to complex plane coordinates
+ * Applies zoom and translation
  */
 t_complex	screen_to_complex(int x, int y, t_fractal_params *params)
 {
 	t_complex	c;
+	double		range_real;
+	double		range_imag;
 
-	c.real = params->min_real + (x + params->move_x) * 
-		(params->max_real - params->min_real) / WIDTH;
-	c.imag = params->min_imag + (y + params->move_y) * 
-		(params->max_imag - params->min_imag) / HEIGHT;
+	range_real = (params->max_real - params->min_real) / params->zoom;
+	range_imag = (params->max_imag - params->min_imag) / params->zoom;
+	c.real = params->min_real + (x + params->move_x) * range_real / WIDTH;
+	c.imag = params->min_imag + (y + params->move_y) * range_imag / HEIGHT;
 	return (c);
 }
 

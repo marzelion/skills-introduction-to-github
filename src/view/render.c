@@ -10,10 +10,19 @@ int	init_view(t_view *view)
 		return (0);
 	view->win_ptr = mlx_new_window(view->mlx_ptr, WIDTH, HEIGHT, "Fractol");
 	if (!view->win_ptr)
+	{
+		mlx_destroy_display(view->mlx_ptr);
+		free(view->mlx_ptr);
 		return (0);
+	}
 	view->img.img_ptr = mlx_new_image(view->mlx_ptr, WIDTH, HEIGHT);
 	if (!view->img.img_ptr)
+	{
+		mlx_destroy_window(view->mlx_ptr, view->win_ptr);
+		mlx_destroy_display(view->mlx_ptr);
+		free(view->mlx_ptr);
 		return (0);
+	}
 	view->img.addr = mlx_get_data_addr(view->img.img_ptr,
 			&view->img.bits_per_pixel,
 			&view->img.line_length,

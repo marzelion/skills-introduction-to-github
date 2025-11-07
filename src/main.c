@@ -32,19 +32,26 @@ static void	print_usage(void)
 static int	parse_fractal_type(char *arg)
 {
 	int	i;
+	int	len;
 
+	if (!arg || !arg[0])
+		return (0);
+	/* Convert to lowercase */
 	i = 0;
-	while (arg[i])
+	len = 0;
+	while (arg[len])
+		len++;
+	while (i < len)
 	{
 		if (arg[i] >= 'A' && arg[i] <= 'Z')
 			arg[i] = arg[i] + 32;
 		i++;
 	}
-	if (!arg[0])
-		return (0);
-	if (arg[0] == 'm' && arg[1] == 'a')
+	/* Check for mandelbrot (at least "ma") */
+	if (len >= 2 && arg[0] == 'm' && arg[1] == 'a')
 		return (MANDELBROT);
-	else if (arg[0] == 'j' && arg[1] == 'u')
+	/* Check for julia (at least "ju") */
+	else if (len >= 2 && arg[0] == 'j' && arg[1] == 'u')
 		return (JULIA);
 	return (0);
 }
